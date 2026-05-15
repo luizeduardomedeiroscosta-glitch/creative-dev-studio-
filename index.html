@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creative Dev Studio | Luiz Eduardo Costa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="life-canvas" aria-hidden="true"></canvas>
+  <div id="cursor" aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a href="#home" class="logo">Creative<span>.</span>Dev</a>
+    <nav class="site-nav" aria-label="Navegação principal">
+      <a href="#experimentos">Experimentos</a>
+      <a href="#laboratorio">Laboratório</a>
+      <a href="#guia">Guia</a>
+      <button class="theme-mini" id="theme-mini" type="button" aria-label="Alternar tema">◐</button>
+    </nav>
+    <div class="header-status">
+      <span class="status-dot" aria-hidden="true"></span>
+      tudo funcional
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="hero-bg-text" aria-hidden="true">LIVE</div>
+      <p class="hero-counter fade-up">laboratório criativo interativo</p>
+      <h1 class="hero-title fade-up delay-1" id="hero-title">
+        HTML.<br>
+        <span class="line-accent">CSS.</span><br>
+        <span class="line-outline">JS.</span>
+      </h1>
+      <div class="hero-meta fade-up delay-2">
+        <p class="hero-desc">
+          Uma coleção viva de experimentos visuais com <strong>calculadora, paletas, relógio, tema, typewriter e lightbox</strong> rodando na mesma página.
+        </p>
+        <a class="hero-action" href="#laboratorio">abrir laboratório</a>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <section id="experimentos" class="experiments-section" aria-labelledby="experiments-title">
+      <div class="section-label" id="experiments-title">01 - escolha um experimento</div>
+
+      <div class="grid">
+        <button class="card fade-up tool-card active" type="button" data-tool="palette" style="--card-accent: #c8f135;">
+          <div class="card-top"><span class="card-tag">Cor</span><span class="card-num">001</span></div>
+          <div class="card-preview"><div class="preview-palette" id="card-palette"></div></div>
+          <h2 class="card-title">Gerador de Paletas</h2>
+          <p class="card-desc">Crie combinações, copie cores e aplique o clima visual ao site.</p>
+          <div class="card-footer"><span class="tech-badge">copiar HEX</span><span class="card-arrow">↘</span></div>
+        </button>
+
+        <button class="card fade-up delay-1 tool-card" type="button" data-tool="clock" style="--card-accent: #5caaff;">
+          <div class="card-top"><span class="card-tag">Tempo</span><span class="card-num">002</span></div>
+          <div class="card-preview">
+            <div class="preview-clock" aria-hidden="true">
+              <span class="clock-hand hour-hand" id="card-hour"></span>
+              <span class="clock-hand minute-hand" id="card-minute"></span>
+              <span class="clock-hand second-hand" id="card-second"></span>
+            </div>
+          </div>
+          <h2 class="card-title">Relógio Vivo</h2>
+          <p class="card-desc">Relógio analógico e digital atualizado em tempo real.</p>
+          <div class="card-footer"><span class="tech-badge">tempo real</span><span class="card-arrow">↘</span></div>
+        </button>
+
+        <button class="card fade-up delay-2 tool-card" type="button" data-tool="calculator" style="--card-accent: #ff5c5c;">
+          <div class="card-top"><span class="card-tag">UI</span><span class="card-num">003</span></div>
+          <div class="card-preview"><div class="preview-calc" id="calc-mini">12 + 8 = 20</div></div>
+          <h2 class="card-title">Calculadora</h2>
+          <p class="card-desc">Operações básicas com clique, teclado, porcentagem e limpeza rápida.</p>
+          <div class="card-footer"><span class="tech-badge">teclado</span><span class="card-arrow">↘</span></div>
+        </button>
+
+        <button class="card fade-up tool-card" type="button" data-tool="theme" style="--card-accent: #d1a8ff;">
+          <div class="card-top"><span class="card-tag">UX</span><span class="card-num">004</span></div>
+          <div class="card-preview">
+            <div class="preview-theme"><span class="theme-half theme-light">☀</span><span class="theme-half theme-dark">◐</span></div>
+          </div>
+          <h2 class="card-title">Modo Claro / Escuro</h2>
+          <p class="card-desc">Tema com transição suave e preferência salva no navegador.</p>
+          <div class="card-footer"><span class="tech-badge">localStorage</span><span class="card-arrow">↘</span></div>
+        </button>
+
+        <button class="card fade-up delay-1 tool-card" type="button" data-tool="typewriter" style="--card-accent: #c8f135;">
+          <div class="card-top"><span class="card-tag">Texto</span><span class="card-num">005</span></div>
+          <div class="card-preview"><div class="preview-typewriter"><span id="typewriter-mini">desenvolvedor frontend_</span></div></div>
+          <h2 class="card-title">Typewriter</h2>
+          <p class="card-desc">Digite frases, ajuste velocidade e veja a animação responder.</p>
+          <div class="card-footer"><span class="tech-badge">frases editáveis</span><span class="card-arrow">↘</span></div>
+        </button>
+
+        <button class="card fade-up delay-2 tool-card" type="button" data-tool="lightbox" style="--card-accent: #ffcf5c;">
+          <div class="card-top"><span class="card-tag">Galeria</span><span class="card-num">006</span></div>
+          <div class="card-preview lightbox-preview" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <h2 class="card-title">Lightbox</h2>
+          <p class="card-desc">Galeria pronta com modal, próximo, anterior, ESC e clique fora.</p>
+          <div class="card-footer"><span class="tech-badge">modal</span><span class="card-arrow">↘</span></div>
+        </button>
+
+        <button class="card fade-up tool-card" type="button" data-tool="guide" style="--card-accent: #7fffd4;">
+          <div class="card-top"><span class="card-tag">Starter</span><span class="card-num">007</span></div>
+          <div class="card-preview starter-preview" aria-hidden="true">
+            <span>&lt;main&gt;</span>
+            <span>.css</span>
+            <span>app()</span>
+          </div>
+          <h2 class="card-title">Começar Código</h2>
+          <p class="card-desc">Estruturas prontas de HTML, CSS e JavaScript, atalhos e passos para iniciar qualquer projeto.</p>
+          <div class="card-footer"><span class="tech-badge">copiar blocos</span><span class="card-arrow">↘</span></div>
+        </button>
+      </div>
+    </section>
+
+    <section class="lab" id="laboratorio" aria-labelledby="lab-title">
+      <div class="section-label" id="lab-title">02 - laboratório funcional</div>
+
+      <div class="lab-shell">
+        <aside class="lab-tabs" aria-label="Ferramentas">
+          <button class="tab-btn active" type="button" data-tool="palette">Paletas</button>
+          <button class="tab-btn" type="button" data-tool="clock">Relógio</button>
+          <button class="tab-btn" type="button" data-tool="calculator">Calculadora</button>
+          <button class="tab-btn" type="button" data-tool="theme">Dark mode</button>
+          <button class="tab-btn" type="button" data-tool="typewriter">Typewriter</button>
+          <button class="tab-btn" type="button" data-tool="lightbox">Lightbox</button>
+          <button class="tab-btn" type="button" data-tool="guide">Começar código</button>
+        </aside>
+
+        <div class="tool-panels">
+          <section class="tool-panel active" data-panel="palette" aria-labelledby="palette-title">
+            <div class="panel-heading">
+              <span>001</span>
+              <h2 id="palette-title">Gerador de paletas</h2>
+              <p>Clique para copiar uma cor ou gere uma combinação nova para mudar a energia da página.</p>
+            </div>
+            <div class="palette-toolbar">
+              <label for="palette-mode">Tipo de paleta</label>
+              <select id="palette-mode">
+                <option value="vibrant">Vibrante</option>
+                <option value="pastel">Pastel</option>
+                <option value="neon">Neon</option>
+                <option value="earth">Natural</option>
+                <option value="mono">Monocromática</option>
+                <option value="analogous">Análoga</option>
+              </select>
+            </div>
+            <div class="preset-palettes" aria-label="Paletas prontas">
+              <button type="button" class="preset-btn active" data-preset="studio">Studio</button>
+              <button type="button" class="preset-btn" data-preset="ocean">Ocean</button>
+              <button type="button" class="preset-btn" data-preset="sunset">Sunset</button>
+              <button type="button" class="preset-btn" data-preset="forest">Forest</button>
+              <button type="button" class="preset-btn" data-preset="candy">Candy</button>
+              <button type="button" class="preset-btn" data-preset="luxury">Luxury</button>
+            </div>
+            <div class="palette-grid" id="palette-grid"></div>
+            <div class="panel-actions">
+              <button class="btn-primary" id="generate-palette" type="button">Gerar nova paleta</button>
+              <button class="btn-secondary" id="apply-palette" type="button">Aplicar no site</button>
+              <span class="copy-feedback" id="copy-feedback">clique em uma cor para copiar</span>
+            </div>
+          </section>
+
+          <section class="tool-panel" data-panel="clock" aria-labelledby="clock-title">
+            <div class="panel-heading">
+              <span>002</span>
+              <h2 id="clock-title">Relógio em tempo real</h2>
+              <p>Analógico, digital e com data local atualizada automaticamente.</p>
+            </div>
+            <div class="clock-stage">
+              <div class="big-clock" aria-label="Relógio analógico">
+                <span class="clock-mark m12">12</span>
+                <span class="clock-mark m3">3</span>
+                <span class="clock-mark m6">6</span>
+                <span class="clock-mark m9">9</span>
+                <span class="clock-hand big-hour" id="big-hour"></span>
+                <span class="clock-hand big-minute" id="big-minute"></span>
+                <span class="clock-hand big-second" id="big-second"></span>
+                <span class="clock-center"></span>
+              </div>
+              <div class="time-readout">
+                <strong id="digital-time">00:00:00</strong>
+                <span id="digital-date">carregando data</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="tool-panel" data-panel="calculator" aria-labelledby="calculator-title">
+            <div class="panel-heading">
+              <span>003</span>
+              <h2 id="calculator-title">Calculadora funcional</h2>
+              <p>Use os botões ou o teclado. Enter calcula, Backspace apaga e Esc limpa.</p>
+            </div>
+            <div class="calculator">
+              <div class="calc-screen">
+                <span id="calc-history"></span>
+                <output id="calc-display">0</output>
+              </div>
+              <div class="calc-keys">
+                <button type="button" data-action="clear">AC</button>
+                <button type="button" data-action="backspace">⌫</button>
+                <button type="button" data-action="percent">%</button>
+                <button type="button" data-op="/">÷</button>
+                <button type="button" data-num="7">7</button>
+                <button type="button" data-num="8">8</button>
+                <button type="button" data-num="9">9</button>
+                <button type="button" data-op="*">×</button>
+                <button type="button" data-num="4">4</button>
+                <button type="button" data-num="5">5</button>
+                <button type="button" data-num="6">6</button>
+                <button type="button" data-op="-">−</button>
+                <button type="button" data-num="1">1</button>
+                <button type="button" data-num="2">2</button>
+                <button type="button" data-num="3">3</button>
+                <button type="button" data-op="+">+</button>
+                <button type="button" data-action="sign">±</button>
+                <button type="button" data-num="0">0</button>
+                <button type="button" data-num=".">,</button>
+                <button class="equals" type="button" data-action="equals">=</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="tool-panel" data-panel="theme" aria-labelledby="theme-title">
+            <div class="panel-heading">
+              <span>004</span>
+              <h2 id="theme-title">Modo claro e escuro</h2>
+              <p>Alterne o tema geral. A escolha fica salva para a próxima vez que você abrir o site.</p>
+            </div>
+            <div class="theme-console">
+              <div class="theme-demo">
+                <span>Creative.Dev</span>
+                <strong id="theme-state">Tema escuro ativo</strong>
+                <p>As cores, superfícies e contraste da página se ajustam em tempo real.</p>
+              </div>
+              <button class="theme-switch" id="theme-toggle" type="button" aria-pressed="false">
+                <span></span>
+                Alternar tema
+              </button>
+            </div>
+          </section>
+
+          <section class="tool-panel" data-panel="typewriter" aria-labelledby="typewriter-title">
+            <div class="panel-heading">
+              <span>005</span>
+              <h2 id="typewriter-title">Typewriter editável</h2>
+              <p>Escreva frases separadas por vírgula e controle a velocidade do efeito.</p>
+            </div>
+            <div class="typewriter-stage">
+              <div class="typewriter-output"><span id="typewriter-output"></span><i></i></div>
+              <label for="typewriter-input">Frases</label>
+              <textarea id="typewriter-input" rows="4">sites vivos, interfaces bonitas, JavaScript puro, criado por Luiz Eduardo Costa</textarea>
+              <label for="typewriter-speed">Velocidade</label>
+              <input id="typewriter-speed" type="range" min="35" max="180" value="80">
+              <button class="btn-primary" id="restart-typewriter" type="button">Reiniciar efeito</button>
+            </div>
+          </section>
+
+          <section class="tool-panel" data-panel="lightbox" aria-labelledby="lightbox-title">
+            <div class="panel-heading">
+              <span>006</span>
+              <h2 id="lightbox-title">Galeria com lightbox</h2>
+              <p>Abra uma imagem, navegue pelas setas e feche com ESC.</p>
+            </div>
+            <div class="gallery-grid" id="gallery-grid">
+              <button class="gallery-item" type="button" data-index="0"><span>Neon</span></button>
+              <button class="gallery-item" type="button" data-index="1"><span>Grid</span></button>
+              <button class="gallery-item" type="button" data-index="2"><span>Solar</span></button>
+              <button class="gallery-item" type="button" data-index="3"><span>Glass</span></button>
+              <button class="gallery-item" type="button" data-index="4"><span>Code</span></button>
+              <button class="gallery-item" type="button" data-index="5"><span>Studio</span></button>
+            </div>
+          </section>
+
+          <section class="tool-panel" data-panel="guide" aria-labelledby="guide-title" id="guia">
+            <div class="panel-heading">
+              <span>007</span>
+              <h2 id="guide-title">Guia inteligente para começar</h2>
+              <p>Use estes blocos como base. Comece pelo HTML, conecte o CSS, ligue o JavaScript e evolua por partes.</p>
+            </div>
+
+            <div class="guide-layout">
+              <div class="guide-steps">
+                <article>
+                  <strong>1. Estrutura</strong>
+                  <p>Crie a página com cabeçalho, conteúdo principal e rodapé. Use classes e IDs com nomes claros.</p>
+                </article>
+                <article>
+                  <strong>2. Visual</strong>
+                  <p>Defina cores, fontes, espaçamento e responsividade antes de adicionar muitos detalhes.</p>
+                </article>
+                <article>
+                  <strong>3. Ação</strong>
+                  <p>No JavaScript, selecione elementos, escute eventos e atualize a tela com funções pequenas.</p>
+                </article>
+              </div>
+
+              <div class="shortcut-grid">
+                <div><kbd>!</kbd><span>cria HTML base no VS Code</span></div>
+                <div><kbd>Ctrl + /</kbd><span>comenta ou descomenta código</span></div>
+                <div><kbd>Alt + Shift + F</kbd><span>formata o arquivo</span></div>
+                <div><kbd>Ctrl + D</kbd><span>seleciona a próxima palavra igual</span></div>
+                <div><kbd>Ctrl + Space</kbd><span>abre sugestões de código</span></div>
+                <div><kbd>F12</kbd><span>abre o DevTools do navegador</span></div>
+              </div>
+            </div>
+
+            <div class="snippet-board">
+              <article class="snippet-card">
+                <div class="snippet-header">
+                  <span>index.html</span>
+                  <button class="copy-snippet" type="button" data-copy-target="snippet-html">Copiar</button>
+                </div>
+                <pre><code id="snippet-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Meu Projeto&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;header class="topo"&gt;
+    &lt;h1&gt;Meu Projeto&lt;/h1&gt;
+    &lt;button id="themeButton" type="button"&gt;Tema&lt;/button&gt;
+  &lt;/header&gt;
+
+  &lt;main class="app"&gt;
+    &lt;section class="card"&gt;
+      &lt;h2&gt;Comece aqui&lt;/h2&gt;
+      &lt;p&gt;Escreva sua ideia e transforme em interface.&lt;/p&gt;
+      &lt;button id="actionButton" type="button"&gt;Clique&lt;/button&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+
+  &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+              </article>
+
+              <article class="snippet-card">
+                <div class="snippet-header">
+                  <span>style.css</span>
+                  <button class="copy-snippet" type="button" data-copy-target="snippet-css">Copiar</button>
+                </div>
+                <pre><code id="snippet-css">:root {
+  --bg: #101010;
+  --card: #181818;
+  --text: #f5f5f5;
+  --accent: #c8f135;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+}
+
+.card {
+  width: min(92vw, 520px);
+  padding: 32px;
+  border: 1px solid #2b2b2b;
+  border-radius: 12px;
+  background: var(--card);
+}
+
+button {
+  border: 0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  background: var(--accent);
+  color: #111;
+  cursor: pointer;
+}</code></pre>
+              </article>
+
+              <article class="snippet-card">
+                <div class="snippet-header">
+                  <span>script.js</span>
+                  <button class="copy-snippet" type="button" data-copy-target="snippet-js">Copiar</button>
+                </div>
+                <pre><code id="snippet-js">const actionButton = document.querySelector("#actionButton");
+const themeButton = document.querySelector("#themeButton");
+
+function showMessage() {
+  alert("Seu JavaScript está funcionando!");
+}
+
+function toggleTheme() {
+  document.body.classList.toggle("light");
+}
+
+actionButton.addEventListener("click", showMessage);
+themeButton.addEventListener("click", toggleTheme);</code></pre>
+              </article>
+            </div>
+
+            <div class="recipe-panel">
+              <h3>Receita rápida para criar qualquer código</h3>
+              <ol>
+                <li>Escreva o objetivo em uma frase: "quero uma calculadora", "quero uma galeria", "quero um menu".</li>
+                <li>No HTML, crie os elementos que precisam aparecer na tela.</li>
+                <li>No CSS, organize layout primeiro: largura, grid, flex, espaçamento e cores.</li>
+                <li>No JS, pegue os elementos com <code>querySelector</code> e crie eventos com <code>addEventListener</code>.</li>
+                <li>Teste uma parte pequena, corrija, depois adicione a próxima função.</li>
+              </ol>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-left">
+      <strong>Creative Dev Studio</strong><br>
+      HTML · CSS · JavaScript puro<br>
+      criado por <strong>Luiz Eduardo Costa</strong>
+    </div>
+    <div class="footer-links">
+      <a href="#experimentos">Experimentos</a>
+      <a href="#laboratorio">Laboratório</a>
+    </div>
+  </footer>
+
+  <div class="lightbox-modal" id="lightbox-modal" aria-hidden="true" role="dialog" aria-label="Visualizador de galeria">
+    <button class="modal-close" id="modal-close" type="button" aria-label="Fechar">×</button>
+    <button class="modal-nav modal-prev" id="modal-prev" type="button" aria-label="Imagem anterior">‹</button>
+    <figure class="modal-card">
+      <div class="modal-art" id="modal-art"></div>
+      <figcaption id="modal-caption">Galeria</figcaption>
+    </figure>
+    <button class="modal-nav modal-next" id="modal-next" type="button" aria-label="Próxima imagem">›</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
